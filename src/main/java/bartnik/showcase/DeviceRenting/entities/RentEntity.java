@@ -1,14 +1,8 @@
 package bartnik.showcase.DeviceRenting.entities;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -17,28 +11,33 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "rent")
 public class RentEntity {
 
     @Id
-    @GeneratedValue
-    Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
-    CustomerEntity customerEntity;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private CustomerEntity customerEntity;
 
     @NotNull
-    DeviceEntity deviceEntity;
+    @ManyToOne
+    @JoinColumn(name = "device_id", referencedColumnName = "id")
+    private DeviceEntity deviceEntity;
 
     @NotNull
-    LocalDateTime startDateTime;
+    private LocalDateTime startDateTime;
 
     @NotNull
-    LocalDateTime endDateTime;
+    private LocalDateTime endDateTime;
 
     @NotNull
     @Digits(integer = 8, fraction = 2)
-    BigDecimal price;
+    private BigDecimal price;
 }

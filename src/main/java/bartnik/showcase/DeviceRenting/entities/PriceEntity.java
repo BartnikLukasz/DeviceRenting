@@ -1,9 +1,6 @@
 package bartnik.showcase.DeviceRenting.entities;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -13,20 +10,22 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "price_list")
 public class PriceEntity {
 
     @Id
-    @GeneratedValue
-    Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
-    @Column(unique = true)
-    DeviceEntity deviceEntity;
+    @OneToOne
+    @JoinColumn(name = "device_id", referencedColumnName = "id", unique = true)
+    private DeviceEntity deviceEntity;
 
     @NotNull
     @Digits(integer = 6, fraction = 2)
-    BigDecimal pricePerMinute;
+    private BigDecimal pricePerMinute;
 }
