@@ -21,12 +21,12 @@ public class PriceService {
     private final PriceMapper priceMapper;
     private final PriceRepository priceRepository;
 
-    public String setPrice(PriceListRequestDto price) throws NotFoundException {
+    public PriceEntity setPrice(PriceListRequestDto price) throws NotFoundException {
         PriceEntity priceEntity = priceRepository.findPriceByDeviceName(price.getDeviceName())
                         .orElse(priceMapper.mapPriceRequestDtoToPriceEntity(price));
         priceEntity.setPricePerMinute(price.getPricePerMinute());
         priceRepository.save(priceEntity);
-        return "";
+        return priceEntity;
     }
 
     private BigDecimal getPrice(String deviceName) throws NotFoundException {

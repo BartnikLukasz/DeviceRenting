@@ -23,8 +23,9 @@ public class RentController {
     private final PriceService priceService;
 
     @PutMapping("/price")
-    public ResponseEntity<String> setPrice(@Valid @RequestBody PriceListRequestDto price) throws NotFoundException {
-        return ResponseEntity.ok(priceService.setPrice(price));
+    public ResponseEntity<?> setPrice(@Valid @RequestBody PriceListRequestDto price) throws NotFoundException {
+        priceService.setPrice(price);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/rent")
