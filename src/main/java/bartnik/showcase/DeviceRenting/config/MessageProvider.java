@@ -15,6 +15,7 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "message")
 public class MessageProvider {
 
+    private Map<String, String> success;
     private Map<String, String> error;
     private Map<String, String> name;
 }

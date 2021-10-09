@@ -28,9 +28,9 @@ public class RentService {
         rentRepository.save(rentMapper.mapRentRequestDtoToRentEntity(request));
     }
 
-    public ReportResponseDto createReport(Long customerId, LocalDate period){
-        LocalDateTime periodFrom = period.minusDays(period.getDayOfMonth()-1).atStartOfDay();
-        LocalDateTime periodTo = periodFrom.plusDays(period.lengthOfMonth()-1).plusHours(23).plusMinutes(59);
+    public ReportResponseDto createReport(Long customerId, LocalDate period) {
+        LocalDateTime periodFrom = period.minusDays(period.getDayOfMonth() - 1).atStartOfDay();
+        LocalDateTime periodTo = periodFrom.plusDays(period.lengthOfMonth() - 1).plusHours(23).plusMinutes(59);
         ArrayList<RentEntity> rentEntities = rentRepository.getAllRentalsForUserInPeriod(customerId, periodFrom, periodTo);
 
         return ReportResponseDto.builder()
@@ -40,20 +40,20 @@ public class RentService {
                 .build();
     }
 
-    private ArrayList<RentDto> getRentDtoList(ArrayList<RentEntity> rentEntities){
+    private ArrayList<RentDto> getRentDtoList(ArrayList<RentEntity> rentEntities) {
         return (ArrayList<RentDto>) rentEntities
                 .stream()
                 .map(rentMapper::mapRentEntityToRentDto)
                 .collect(Collectors.toList());
     }
 
-    private BigDecimal getCharge(ArrayList<RentEntity> rentEntities){
+    private BigDecimal getCharge(ArrayList<RentEntity> rentEntities) {
         return total(rentEntities)
                 .stream()
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private ArrayList<BigDecimal> total(ArrayList<RentEntity> rentEntities){
+    private ArrayList<BigDecimal> total(ArrayList<RentEntity> rentEntities) {
         return (ArrayList<BigDecimal>) rentEntities
                 .stream()
                 .map((RentEntity::getPrice))

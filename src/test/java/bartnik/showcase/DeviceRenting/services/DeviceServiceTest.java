@@ -15,7 +15,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
@@ -36,11 +37,11 @@ class DeviceServiceTest {
         deviceService = new DeviceService(messageProvider, deviceRepository);
 
         devices.add(DeviceEntity.builder()
-        .id(1L)
-        .name("name")
-        .productionDate(LocalDate.now())
-        .serialNumber("serial")
-        .build());
+                .id(1L)
+                .name("name")
+                .productionDate(LocalDate.now())
+                .serialNumber("serial")
+                .build());
     }
 
     @Test

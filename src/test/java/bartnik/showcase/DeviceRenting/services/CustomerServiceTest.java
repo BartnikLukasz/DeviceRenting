@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
@@ -35,11 +36,11 @@ class CustomerServiceTest {
         customerService = new CustomerService(messageProvider, customerRepository);
 
         customers.add(CustomerEntity.builder()
-        .id(1L)
-        .name("Name")
-        .surname("Surname")
-        .email("Email@email.com")
-        .build());
+                .id(1L)
+                .name("Name")
+                .surname("Surname")
+                .email("Email@email.com")
+                .build());
     }
 
     @Test
@@ -55,12 +56,12 @@ class CustomerServiceTest {
     }
 
     @Test
-    void getCustomerById_should_throw_NotFoundException(){
+    void getCustomerById_should_throw_NotFoundException() {
         customers.clear();
         when(customerRepository.findById(anyLong())).thenReturn(customers.stream().findFirst());
         when(messageProvider.getName()).thenReturn(Map.of("customer", "Customer"));
 
-        assertThrows(NotFoundException.class, () -> customerService.getCustomerById(1L)) ;
+        assertThrows(NotFoundException.class, () -> customerService.getCustomerById(1L));
 
         verify(customerRepository).findById(anyLong());
         verify(messageProvider).getName();

@@ -29,7 +29,7 @@ public abstract class RentMapper {
     @Mapping(target = "price", expression = "java(priceService.calculatePrice(request.getDeviceName(), request.getStartDateTime(), request.getEndDateTime()))")
     public abstract RentEntity mapRentRequestDtoToRentEntity(RentRequestDto request) throws NotFoundException;
 
-    @Mapping(target = "customerFullName", expression= "java(" +
+    @Mapping(target = "customerFullName", expression = "java(" +
             "org.apache.commons.lang3.StringUtils.join(" +
             "entity.getCustomerEntity().getName(), ' ', " +
             "entity.getCustomerEntity().getSurname()))")

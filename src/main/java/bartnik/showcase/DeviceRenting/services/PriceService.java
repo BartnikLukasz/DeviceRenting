@@ -23,7 +23,7 @@ public class PriceService {
 
     public PriceEntity setPrice(PriceListRequestDto price) throws NotFoundException {
         PriceEntity priceEntity = priceRepository.findPriceByDeviceName(price.getDeviceName())
-                        .orElse(priceMapper.mapPriceRequestDtoToPriceEntity(price));
+                .orElse(priceMapper.mapPriceRequestDtoToPriceEntity(price));
         priceEntity.setPricePerMinute(price.getPricePerMinute());
         priceRepository.save(priceEntity);
         return priceEntity;

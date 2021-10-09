@@ -9,7 +9,6 @@ import bartnik.showcase.DeviceRenting.repositories.DeviceRepository;
 import bartnik.showcase.DeviceRenting.repositories.PriceRepository;
 import bartnik.showcase.DeviceRenting.repositories.RentRepository;
 import bartnik.showcase.DeviceRenting.services.PriceService;
-import bartnik.showcase.DeviceRenting.services.RentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -55,10 +54,10 @@ public class DataLoader implements ApplicationRunner {
                 .customerEntity(customerEntity)
                 .price(priceService.calculatePrice(
                         deviceEntity.getName(),
-                        LocalDateTime.of(2021, 10, 10, 10, 10 ),
-                        LocalDateTime.of(2021, 10, 10, 11, 11 )))
-                .startDateTime(LocalDateTime.of(2021, 10, 10, 10, 10 ))
-                .endDateTime(LocalDateTime.of(2021, 10, 10, 11, 11 ))
+                        LocalDateTime.of(2021, 10, 10, 10, 10),
+                        LocalDateTime.of(2021, 10, 10, 11, 11)))
+                .startDateTime(LocalDateTime.of(2021, 10, 10, 10, 10))
+                .endDateTime(LocalDateTime.of(2021, 10, 10, 11, 11))
                 .build();
 
         rentRepository.save(rentEntity);

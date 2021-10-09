@@ -19,7 +19,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
@@ -49,10 +50,10 @@ class PriceServiceTest {
                 .serialNumber("serial")
                 .build();
         prices.add(PriceEntity.builder()
-        .pricePerMinute(BigDecimal.valueOf(10d))
-        .id(1L)
-        .deviceEntity(device)
-        .build());
+                .pricePerMinute(BigDecimal.valueOf(10d))
+                .id(1L)
+                .deviceEntity(device)
+                .build());
     }
 
     @Test
@@ -75,9 +76,9 @@ class PriceServiceTest {
         when(priceMapper.mapPriceRequestDtoToPriceEntity(any())).thenReturn(price2);
 
         PriceEntity entity = priceService.setPrice(PriceListRequestDto.builder()
-        .pricePerMinute(BigDecimal.valueOf(6d))
-        .deviceName("name2")
-        .build());
+                .pricePerMinute(BigDecimal.valueOf(6d))
+                .deviceName("name2")
+                .build());
 
         verify(priceRepository).findPriceByDeviceName(any());
         verify(priceRepository).save(any());

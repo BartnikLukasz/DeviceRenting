@@ -23,7 +23,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(NotFoundException.class)
-    protected ResponseEntity<Object> handleNotFoundException(NotFoundException ex){
+    protected ResponseEntity<Object> handleNotFoundException(NotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(StringUtils.join(ex.getMessage(), " ", messageProvider.getError().get("notFound")));
     }
 }
